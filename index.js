@@ -1,19 +1,20 @@
-/**
- * This line of code retrieves the number of buttons with the class 'drum' in the DOM.
- * It uses the `querySelectorAll` method to select all elements with the specified class, and then gets the length of the resulting NodeList.
- * This value is stored in the `numberOfButtons` variable and is used later in the code to loop through all the buttons and add event listeners to them.
- */
-
 let numberOfButtons = document.querySelectorAll('.drum').length
 
-/**
- * This function is triggered when a button is clicked. It plays the appropriate sound based on the button that was clicked.
- * @param {Event} event - The event object that contains information about the button click.
- */
+/*This function detects the presses of the buttons with pictures 
+* and handles them accordingly to make a sound */
 function handleClick () {
   let buttonInnerHTML = this.innerHTML
 
-  switch (buttonInnerHTML) {
+  makeSound(buttonInnerHTML);
+}
+
+for (let i = 0; i < numberOfButtons; i++) {
+  document.querySelectorAll('button')[i].addEventListener('click', handleClick)
+}
+
+//This function detects keyboard presses and handles them accordingly to make a sound
+function makeSound(key){
+  switch (key) {
     case 'w':
       let tom1 = new Audio('sounds/tom-1.mp3');
       tom1.play();
@@ -46,16 +47,7 @@ function handleClick () {
     default:
       console.log(buttonInnerHTML);
   }
+
+  document.addEventListener('keydown', function(event) {makeSound(event.key);});
+
 }
-
-/**
- * This loop iterates through all the buttons in the DOM that have the class 'drum'.
- * For each button, it adds an event listener that triggers the `handleClick` function when the button is clicked.
- * This ensures that each button plays the appropriate sound when it is clicked.
- */
-
-for (let i = 0; i < numberOfButtons; i++) {
-  document.querySelectorAll('button')[i].addEventListener('click', handleClick)
-}
-
-document.addEventListener('keydown', function() {alert("A key was pressed!");});
