@@ -57,3 +57,5 @@ function handleClick () {
 for (let i = 0; i < numberOfButtons; i++) {
   document.querySelectorAll('button')[i].addEventListener('click', handleClick)
 }
+
+document.addEventListener('keydown', function() {alert("A key was pressed!");});
